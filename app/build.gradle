@@ -10,6 +10,9 @@ android {
         versionCode 3
         versionName "3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //testInstrumentationRunner "android.test.InstrumentationTestRunner"
+       // testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
+
     }
     buildTypes {
         release {
@@ -22,6 +25,8 @@ android {
         // Error: Duplicate files during packaging of APK
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.md'
+        exclude 'META-INF/LICENSE-notice.md'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/license.txt'
         exclude 'META-INF/NOTICE'
@@ -59,6 +64,25 @@ dependencies {
     androidTestImplementation 'org.mockito:mockito-android:3.7.7'
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.0.1")
     androidTestImplementation("org.junit.jupiter:junit-jupiter-api:5.0.1")
+
+//    androidTestImplementation 'androidx.test:rules:1.1.1'
+//    androidTestImplementation 'androidx.test:runner:1.1.1'
+    // Android Testing Support Library - Instrumented testing
+    androidTestImplementation "androidx.test:runner:$androidXTestVersion"
+    androidTestImplementation "androidx.test:rules:$androidXTestVersion"
+    androidTestImplementation "androidx.room:room-testing:$roomVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
+    implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
+    androidTestImplementation 'androidx.test.espresso:espresso-web:3.1.0'
+
+
+    //androidTestImplementation "com.google.android:android-espresso-bundled:1.1.0-SNAPSHOT"
+    //androidTestImplementation 'com.jayway.android.robotium:robotium:5.4.12'
+
+    androidTestImplementation 'com.android.support.test:rules:0.5'
 
 
 }

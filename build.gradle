@@ -6,8 +6,8 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
-        classpath 'com.google.gms:google-services:4.3.2'
+        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.google.gms:google-services:4.3.5'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -17,9 +17,22 @@ allprojects {
     repositories {
         jcenter()
         google()
+        maven {
+            url "http://ci.novoda.com/maven/releases"
+        }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+ext {
+    // Sdk and tools
+    // Support library and architecture components support minSdk 14 and above.
+
+    // App dependencies
+    androidXTestVersion = '1.1.1'
+
+    espressoVersion = '3.1.1'
+    roomVersion = '2.0.0'
 }

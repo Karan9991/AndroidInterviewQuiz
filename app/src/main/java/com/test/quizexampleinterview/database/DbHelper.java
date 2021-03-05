@@ -31,6 +31,7 @@ public class DbHelper extends SQLiteOpenHelper {
         public DbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
+
         @Override
         public void onCreate(SQLiteDatabase db) {
             String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_QUEST + " ( "

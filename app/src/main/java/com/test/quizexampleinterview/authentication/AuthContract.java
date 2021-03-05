@@ -8,13 +8,13 @@ public interface AuthContract {
         default String getPassword(){ return null;}
         default void initAnimateButton(){}
         default void animateButton(){}
-        default void checkFirebaseLogin(){}
     }
 
     interface Presenter{
         void Login();
         void SignUp();
         void ForgotPassword();
+        void checkFirebaseLogin();
     }
 
 }

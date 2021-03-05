@@ -47,7 +47,6 @@ public class QuizDeskBoardActivity extends AppCompatActivity implements View.OnC
                 break;
         }
 
-
     }
 
     @Override

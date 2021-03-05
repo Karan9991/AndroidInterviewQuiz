@@ -29,18 +29,13 @@ public class Forgot_Password extends AppCompatActivity implements Validate, Auth
 
         initUI();
 
-        authModel = new AuthModel();
         authPresenter = new AuthPresenter(this, this, this);
 
-        sumbmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (validations()) {
-                    authModel.setEmail(edtemailforpass.getText().toString());
-                    authPresenter.ForgotPassword();
-            }
-            }
+        sumbmit.setOnClickListener(view -> {
+            if (validations()) {
+                authModel = new AuthModel(edtemailforpass.getText().toString());
+                authPresenter.ForgotPassword();
+        }
         });
     }
 

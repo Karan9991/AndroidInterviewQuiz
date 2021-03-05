@@ -34,15 +34,13 @@ public class SignUp extends AppCompatActivity implements Validate, AuthContract.
 
         initUI();
 
-        authModel = new AuthModel();
         authPresenter = new AuthPresenter(this, this, this, progressBar);
 
         btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validations()){
-                    authModel.setEmail(edtemail.getText().toString());
-                    authModel.setPassword(edtpass.getText().toString());
+                    authModel = new AuthModel(edtemail.getText().toString(), edtpass.getText().toString());
                     authPresenter.SignUp();
                 }
             }

@@ -47,13 +47,12 @@ public class SignIn extends AppCompatActivity implements AuthContract.View, Vali
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        checkFirebaseLogin();
+        authPresenter = new AuthPresenter(this, this, this);
+        authPresenter.checkFirebaseLogin();
 
         setContentView(R.layout.activity_sign_in);
 
         isValid = false;
-        authModel = new AuthModel();
-        authPresenter = new AuthPresenter(this, this, this);
 
         hideKeyboard(this);
 
@@ -65,8 +64,7 @@ public class SignIn extends AppCompatActivity implements AuthContract.View, Vali
             public void onClick(View p1) {
 
                 if (validations()){
-                    authModel.setEmail(edtemail.getText().toString());
-                    authModel.setPassword(edtpass.getText().toString());
+                    authModel = new AuthModel(edtemail.getText().toString(), edtpass.getText().toString());
                     authPresenter.Login();
                 }
              }
@@ -170,17 +168,6 @@ public class SignIn extends AppCompatActivity implements AuthContract.View, Vali
         pbar = findViewById(R.id.mainProgressBar1);
         button_label = findViewById(R.id.button_label);
     }
-
-    @Override
-    public void checkFirebaseLogin() {
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if (firebaseUser!=null&&firebaseAuth.getCurrentUser().isEmailVerified()){
-            startActivity(new Intent(SignIn.this,QuizDeskBoardActivity.class));
-            finish();
-        }
-    }
-
 
     @Override
     public boolean validations() {
