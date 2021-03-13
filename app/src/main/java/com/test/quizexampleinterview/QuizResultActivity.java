@@ -1,14 +1,8 @@
 package com.test.quizexampleinterview;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,9 +12,8 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.test.quizexampleinterview.authentication.SignIn;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class QuizResultActivity extends AppCompatActivity implements Contract.View
 {
@@ -38,36 +31,6 @@ public class QuizResultActivity extends AppCompatActivity implements Contract.Vi
 
         initActionBar();
         initUI();
-
-        int score = getIntent().getExtras().getInt("result",0);
-        txtScore.setText("Score : " + score);
-
-        blinkText();
-
-        if(score <5)
-        {
-            txtScore.setTextColor(Color.RED);
-            txtResult.setText("Fail");
-            txtGreetings.setText("Bad Luck!!!");
-        }
-       else
-        {
-            txtScore.setTextColor(Color.GREEN);
-            txtResult.setText("Pass");
-            txtGreetings.setText("Congratulation!!!");
-        }
-
-        SharedPreferences sharedPreferences=getPreferences(MODE_PRIVATE);
-        int highscore = sharedPreferences.getInt("highscore",0);
-        if(highscore>=score) {
-            edt.setText("Highest Score : "+highscore);
-        }
-       else {
-           edt.setText("New Score : "+score);
-            SharedPreferences.Editor editor=sharedPreferences.edit();
-            editor.putInt("highscore",score);
-            editor.commit();
-        }
 
        btnplagain.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -92,6 +55,36 @@ public class QuizResultActivity extends AppCompatActivity implements Contract.Vi
         txtGreetings = (TextView)findViewById(R.id.txtGreetings);
         edt = (TextView)findViewById(R.id.editText);
         btnplagain = (Button)findViewById(R.id.playagainbtn);
+
+        int score = getIntent().getExtras().getInt("result",0);
+        txtScore.setText("Score : " + score);
+
+        blinkText();
+
+        if(score <5)
+        {
+            txtScore.setTextColor(Color.RED);
+            txtResult.setText("Fail");
+            txtGreetings.setText("Bad Luck!!!");
+        }
+        else
+        {
+            txtScore.setTextColor(Color.GREEN);
+            txtResult.setText("Pass");
+            txtGreetings.setText("Congratulation!!!");
+        }
+
+        SharedPreferences sharedPreferences=getPreferences(MODE_PRIVATE);
+        int highscore = sharedPreferences.getInt("highscore",0);
+        if(highscore>=score) {
+            edt.setText("Highest Score : "+highscore);
+        }
+        else {
+            edt.setText("New Score : "+score);
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putInt("highscore",score);
+            editor.commit();
+        }
     }
 
     @Override
@@ -107,7 +100,7 @@ public class QuizResultActivity extends AppCompatActivity implements Contract.Vi
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.mymenu, menu);
+        inflater.inflate(R.menu.resultmenu, menu);
         return true;
     }
     @Override

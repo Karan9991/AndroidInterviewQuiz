@@ -8,8 +8,6 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +21,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.test.quizexampleinterview.database.DbHelper;
 import com.test.quizexampleinterview.model.Questions;
@@ -97,8 +98,7 @@ public class QuizMainActivity extends AppCompatActivity implements Contract.View
 
     private void setUpQuizQuestions()
     {
-        DbHelper dbHelper = new DbHelper(this);
-        queList = dbHelper.getAllQuestions();
+        queList =  DbHelper.getInstance(this).getAllQuestions();
     }
 
     private View.OnClickListener onButtonClick = new View.OnClickListener()

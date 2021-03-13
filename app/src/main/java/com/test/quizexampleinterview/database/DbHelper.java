@@ -3,17 +3,19 @@ package com.test.quizexampleinterview.database;
 /**
  * Created by macstudent on 2017-12-05.
  */
-    import java.util.ArrayList;
-import java.util.List;
-import android.content.ContentValues;
+    import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-    import com.test.quizexampleinterview.model.Questions;
+import com.test.quizexampleinterview.model.Questions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
+        private static volatile DbHelper dbHelper;
         private static final int DATABASE_VERSION = 1;
         // Database Name
         private static final String DATABASE_NAME = "Quiz";
@@ -28,9 +30,28 @@ public class DbHelper extends SQLiteOpenHelper {
         private static final String KEY_OPTC= "optc"; //option c
         private static final String KEY_OPTD= "optd";
 
-        public DbHelper(Context context) {
+        private DbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
+
+    public static DbHelper getInstance(Context ctx) {
+        /**
+         * use the application context as suggested by CommonsWare.
+         * this will ensure that you dont accidentally leak an Activitys
+         * context (see this article for more information:
+         * http://android-developers.blogspot.nl/2009/01/avoiding-memory-leaks.html)
+         */
+        if (dbHelper == null) { //Check for the first time
+
+            synchronized (DbHelper.class) {   //Check for the second time.
+                //if there is no instance available... create new one
+                if (dbHelper == null)
+                    dbHelper = new DbHelper(ctx.getApplicationContext());
+            }
+        }
+
+        return dbHelper;
+    }
 
         @Override
         public void onCreate(SQLiteDatabase db) {

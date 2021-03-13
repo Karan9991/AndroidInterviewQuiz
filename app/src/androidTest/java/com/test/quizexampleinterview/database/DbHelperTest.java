@@ -13,10 +13,9 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -28,7 +27,7 @@ public class DbHelperTest {
 
     @Before
     public void setUp() throws Exception {
-        dbHelper = new DbHelper(InstrumentationRegistry.getTargetContext());
+        dbHelper = DbHelper.getInstance(InstrumentationRegistry.getTargetContext());
     }
 
     @After
@@ -38,7 +37,7 @@ public class DbHelperTest {
 
     @Test
     public void getAllQuestions() {
-        dbHelper = new DbHelper(InstrumentationRegistry.getTargetContext());
+        dbHelper = DbHelper.getInstance(InstrumentationRegistry.getTargetContext());
         queList = dbHelper.getAllQuestions();
         questions = queList.get(0);
 
@@ -49,7 +48,7 @@ public class DbHelperTest {
 
     @Test
     public void rowcount() {
-        dbHelper = new DbHelper(InstrumentationRegistry.getTargetContext());
+        dbHelper = DbHelper.getInstance(InstrumentationRegistry.getTargetContext());
         assertEquals(10, dbHelper.rowcount());
     }
 }

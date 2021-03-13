@@ -13,13 +13,12 @@ import org.junit.Test;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isFocusable;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.junit.Assert.*;
 
 //import android.test.ActivityInstrumentationTestCase2;
 
@@ -49,6 +48,20 @@ public class SignUpTest {
         onView(withId(R.id.editTextsigncnfrmpass)).perform(typeText("someString"));
 
         onView(withId(R.id.buttonsignup)).perform(click());
+
+    }
+
+    @Test
+    public void edittext(){
+        SystemClock.sleep(1500);
+
+        onView(withId(R.id.editTextsignemail)).check(matches(isFocusable()));
+        SystemClock.sleep(1500);
+
+        onView(withId(R.id.editTextsignpass)).check(matches(isFocusable()));
+        SystemClock.sleep(1500);
+
+        onView(withId(R.id.editTextsigncnfrmpass)).check(matches(isFocusable()));
 
     }
 }
