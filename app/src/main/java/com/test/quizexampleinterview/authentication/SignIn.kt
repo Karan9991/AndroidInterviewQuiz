@@ -101,7 +101,7 @@ class SignIn : AppCompatActivity(), AuthContract.View, Validate {
         button_login = findViewById(R.id.button_login)
         button_login.setTag(0)
         pbar!!.indeterminateDrawable.setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY)
-        StatusBarUtil.immersive(this)
+        //StatusBarUtil.immersive(this)
         va.duration = 1500
         va.interpolator = DecelerateInterpolator()
         va.addUpdateListener { p1 ->
